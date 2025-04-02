@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { apiRequest } from "@/utils/api";
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const Register = () => {
@@ -45,64 +45,75 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h2 className="text-2xl font-bold">Admin Register</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
-        <Input
-          type="text"
-          placeholder="Name"
-          className="border p-2"
-          value={userData.name}
-          name="name"
-          onChange={handleChange}
-          required
-        />
-        <Input
-          type="text"
-          placeholder="Username"
-          className="border p-2"
-          value={userData.username}
-          name="username"
-          onChange={handleChange}
-          required
-        />
-        <Input
-          type="email"
-          placeholder="Email"
-          className="border p-2"
-          value={userData.email}
-          onChange={handleChange}
-          name="email"
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          className="border p-2"
-          value={userData.password}
-          onChange={handleChange}
-          name="password"
-          required
-        />
-        <Select
-          name="role"
-          onValueChange={(value) =>
-            setUserData((prev) => ({ ...prev, role: value }))
-          }
-          required
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Role" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="ADMIN">Admin</SelectItem>
-            <SelectItem value="USER">User</SelectItem>
-          </SelectContent>
-        </Select>
-        <Button disabled={loading} className="bg-blue-500 text-white px-4 py-2">
-          {loading ? "Registering..." : "Register"}
-        </Button>
-      </form>
+    <div className="flex flex-col items-center justify-center min-h-screen ">
+      <div className="border-2 px-4 py-2 rounded-2xl w-1/4">
+        <h2 className="text-2xl font-bold">Register</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
+          <Input
+            type="text"
+            placeholder="Name"
+            className="border p-2"
+            value={userData.name}
+            name="name"
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="text"
+            placeholder="Username"
+            className="border p-2"
+            value={userData.username}
+            name="username"
+            onChange={handleChange}
+            required
+          />
+          <Input
+            type="email"
+            placeholder="Email"
+            className="border p-2"
+            value={userData.email}
+            onChange={handleChange}
+            name="email"
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            className="border p-2"
+            value={userData.password}
+            onChange={handleChange}
+            name="password"
+            required
+          />
+          <Select
+            name="role"
+            onValueChange={(value) =>
+              setUserData((prev) => ({ ...prev, role: value }))
+            }
+            required
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Role" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ADMIN">Admin</SelectItem>
+              <SelectItem value="USER">User</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button
+            disabled={loading}
+            className="bg-blue-500 text-white px-4 py-2"
+          >
+            {loading ? "Registering..." : "Register"}
+          </Button>
+        </form>
+        <p className="my-2 text-center">
+          Have an account?{" "}
+          <Link to="/login" className="underline ">
+            Login
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

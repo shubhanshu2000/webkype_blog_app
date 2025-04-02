@@ -21,9 +21,11 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { apiRequest } from "@/utils/api";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 
 const Profile = () => {
+  const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     name: "",
     username: "",
@@ -33,7 +35,6 @@ const Profile = () => {
   });
   const [loading, setLoading] = useState(false);
   const [userBlogs, setUserBlogs] = useState([]);
-  const getUserID = localStorage.getItem("id");
 
   const getProfileData = async () => {
     try {
@@ -72,6 +73,10 @@ const Profile = () => {
     }
   };
 
+  const logout = () => {
+    localStorage.clear();
+    navigate("/login");
+  };
   useEffect(() => {
     getProfileData();
     getUserBlogs();
@@ -152,10 +157,11 @@ const Profile = () => {
                 </Select>
               </div>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex gap-2">
               <Button disabled={loading} onClick={handleProfileUpdate}>
                 {loading ? "Saving..." : "Save"}
               </Button>
+              <Button onClick={logout}>Logout</Button>
             </CardFooter>
           </Card>
         </TabsContent>

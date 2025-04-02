@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { apiRequest } from "@/utils/api";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 type userData = {
@@ -41,30 +41,41 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
-      <h2 className="text-2xl font-bold">Admin Login</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
-        <Input
-          type="username"
-          placeholder="User Name"
-          className="border p-2"
-          value={userData.username}
-          onChange={handleChange}
-          name="username"
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Password"
-          className="border p-2"
-          value={userData.password}
-          onChange={handleChange}
-          name="password"
-          required
-        />
-        <Button disabled={loading} className="bg-blue-500 text-white px-4 py-2">
-          {loading ? "Loggin in..." : "Login"}
-        </Button>
-      </form>
+      <div className="border-2 px-4 py-2 rounded-2xl w-1/4">
+        <h2 className="text-2xl font-bold">Login</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-4">
+          <Input
+            type="username"
+            placeholder="User Name"
+            className="border p-2"
+            value={userData.username}
+            onChange={handleChange}
+            name="username"
+            required
+          />
+          <Input
+            type="password"
+            placeholder="Password"
+            className="border p-2"
+            value={userData.password}
+            onChange={handleChange}
+            name="password"
+            required
+          />
+          <Button
+            disabled={loading}
+            className="bg-blue-500 text-white px-4 py-2"
+          >
+            {loading ? "Loggin in..." : "Login"}
+          </Button>
+        </form>
+        <p className="my-2 text-center">
+          Don't have an account?{" "}
+          <Link to="/register" className="underline">
+            Register
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
